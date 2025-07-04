@@ -85,15 +85,15 @@ function MainTabNavigator() {
         component={PantryScreen}
         options={{
           title: '🧺 My Pantry',
-          headerTitle: 'AI Recipe App',
+          headerTitle: 'ReciSense',
         }}
       />
       <Tab.Screen 
         name="Upload" 
         component={RecipeUploadScreen}
         options={{
-          title: '📸 Upload Recipe',
-          headerTitle: 'Recipe Analysis',
+                          title: '📸 ReciSense',
+          headerTitle: 'ReciSense',
         }}
       />
       <Tab.Screen 
@@ -144,7 +144,7 @@ function AppNavigator() {
         name="Results" 
         component={ResultsScreen}
         options={{
-          title: '📊 Recipe Analysis Results',
+          title: '📊 ReciSense Results',
           headerBackTitle: 'Back',
         }}
       />

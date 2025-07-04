@@ -275,7 +275,7 @@ const SettingsScreen = ({ navigation }) => {
             onPress={() => {
               Alert.alert(
                 'Help & Support',
-                'For support, please contact us at support@airecipeapp.com or visit our website for tutorials and FAQs.'
+                'For support, please contact us at support@recisense.com or visit our website for tutorials and FAQs.'
               );
             }}
           />
@@ -290,7 +290,7 @@ const SettingsScreen = ({ navigation }) => {
             onPress={() => {
               Alert.alert(
                 'Rate App',
-                'Thank you for using AI Recipe App! Your feedback helps us improve the app for everyone.'
+                'Thank you for using ReciSense! Your feedback helps us improve the app for everyone.'
               );
             }}
           />

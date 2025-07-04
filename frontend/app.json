@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "AI Recipe App",
-    "slug": "ai-recipe-app",
+    "name": "ReciSense",
+    "slug": "recisense",
     "version": "1.0.0",
     "orientation": "portrait",
     "sdkVersion": "53.0.0",

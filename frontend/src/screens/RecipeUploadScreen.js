@@ -43,6 +43,7 @@ const RecipeUploadScreen = ({ navigation }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisProgress, setAnalysisProgress] = useState(0);
+  const [useFullImage, setUseFullImage] = useState(false);
   const scrollViewRef = useRef(null);
 
   React.useEffect(() => {
@@ -64,14 +65,16 @@ const RecipeUploadScreen = ({ navigation }) => {
     }
   };
 
-  const pickImageFromLibrary = async () => {
+  const pickImageFromLibrary = async (allowEditing = true) => {
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 0.8,
+        allowsEditing: allowEditing,
+        aspect: allowEditing ? undefined : undefined, // No aspect ratio constraint
+        quality: 0.9, // Higher quality for better text recognition
         base64: false,
+        selectionLimit: 1,
+        presentationStyle: 'fullScreen', // Full screen presentation
       });
 
       if (!result.canceled && result.assets && result.assets.length > 0) {
@@ -85,7 +88,7 @@ const RecipeUploadScreen = ({ navigation }) => {
         }, 300);
         
         showMessage({
-          message: '✅ Image selected successfully',
+          message: allowEditing ? '✅ Image selected successfully' : '✅ Full image selected successfully',
           type: 'success',
           duration: 2000,
         });
@@ -97,6 +100,29 @@ const RecipeUploadScreen = ({ navigation }) => {
         type: 'danger',
       });
     }
+  };
+
+  const pickFullImageFromLibrary = () => {
+    Alert.alert(
+      'Select Image Option',
+      'Choose how you want to select your recipe image:',
+      [
+        {
+          text: 'Full Image',
+          onPress: () => pickImageFromLibrary(false),
+          style: 'default',
+        },
+        {
+          text: 'Crop & Edit',
+          onPress: () => pickImageFromLibrary(true),
+          style: 'default',
+        },
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+      ]
+    );
   };
 
   const takePhoto = async () => {
@@ -113,9 +139,10 @@ const RecipeUploadScreen = ({ navigation }) => {
 
       const result = await ImagePicker.launchCameraAsync({
         allowsEditing: true,
-        aspect: [4, 3],
-        quality: 0.8,
+        aspect: undefined, // Remove aspect ratio constraint for full image
+        quality: 0.9, // Higher quality for better text recognition
         base64: false,
+        presentationStyle: 'fullScreen', // Full screen presentation
       });
 
       if (!result.canceled && result.assets && result.assets.length > 0) {
@@ -245,10 +272,12 @@ const RecipeUploadScreen = ({ navigation }) => {
       <StatusBar barStyle="light-content" backgroundColor="#667eea" />
       <View style={styles.headerContent}>
         <Animatable.View animation="fadeInDown" duration={800}>
-          <View style={styles.headerIcon}>
-            <Ionicons name="restaurant" size={32} color="white" />
+          <View style={styles.headerTitleContainer}>
+            <View style={styles.headerIcon}>
+              <Ionicons name="restaurant" size={32} color="white" />
+            </View>
+            <Title style={styles.headerTitle}>ReciSense</Title>
           </View>
-          <Title style={styles.headerTitle}>Recipe Analyzer</Title>
           <Paragraph style={styles.headerSubtitle}>
             Discover what you can cook with your ingredients
           </Paragraph>
@@ -325,7 +354,7 @@ const RecipeUploadScreen = ({ navigation }) => {
 
             <TouchableOpacity
               style={styles.imageOptionButton}
-              onPress={pickImageFromLibrary}
+              onPress={pickFullImageFromLibrary}
               disabled={isAnalyzing}
               activeOpacity={0.7}
             >
@@ -369,7 +398,7 @@ const RecipeUploadScreen = ({ navigation }) => {
           <View style={styles.imageActions}>
             <Button
               mode="outlined"
-              onPress={pickImageFromLibrary}
+              onPress={pickFullImageFromLibrary}
               style={styles.retakeButton}
               disabled={isAnalyzing}
               icon="refresh"
@@ -460,8 +489,8 @@ const RecipeUploadScreen = ({ navigation }) => {
               'Ensure recipe text is clear and readable',
               'Include the complete ingredients list',
               'Use good lighting for better text extraction',
-              'Avoid blurry or tilted images',
-              'Crop to focus on the recipe content'
+              'Select "Full Image" option for complete recipe text',
+              'Use "Crop & Edit" only if you need to focus on specific sections'
             ].map((tip, index) => (
               <View key={index} style={styles.tipItem}>
                 <View style={styles.tipBullet}>
@@ -518,21 +547,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 20,
   },
+  headerTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
   headerIcon: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
     backgroundColor: 'rgba(255,255,255,0.2)',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 16,
+    marginRight: 12,
   },
   headerTitle: {
     fontSize: 28,
     fontWeight: '700',
     color: 'white',
     textAlign: 'center',
-    marginBottom: 8,
   },
   headerSubtitle: {
     fontSize: 16,
@@ -682,8 +715,9 @@ const styles = StyleSheet.create({
   },
   selectedImage: {
     width: '100%',
-    height: Math.min(width * 0.8, 400),
-    resizeMode: 'cover',
+    height: Math.min(width * 1.2, 500), // Larger display for better text visibility
+    resizeMode: 'contain', // Show full image without cropping
+    backgroundColor: '#f8f9fa', // Light background for better contrast
   },
   imageOverlay: {
     position: 'absolute',
