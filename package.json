@@ -1,0 +1,23 @@
+{
+  "name": "ai-recipe-app",
+  "version": "1.0.0",
+  "description": "AI-powered recipe feasibility analyzer with React Native and Node.js",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run backend:dev\" \"npm run frontend:dev\"",
+    "backend:dev": "cd backend && npm run dev",
+    "frontend:dev": "cd frontend && npm start",
+    "backend:install": "cd backend && npm install",
+    "frontend:install": "cd frontend && npm install",
+    "install:all": "npm run backend:install && npm run frontend:install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": ["react-native", "nodejs", "ai", "recipe", "gemini", "ocr"],
+  "author": "AI Recipe App Team",
+  "license": "MIT"
+} 
