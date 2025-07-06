@@ -15,7 +15,7 @@ A cross-platform mobile application built with React Native Expo and Node.js tha
 - **OCR Text Extraction**: Extract recipe text from images
 - **Camera Integration**: Take photos or select from gallery
 - **Image Preprocessing**: Automatic image enhancement for better OCR results
-- **Multiple Formats**: Support for JPEG, PNG, GIF, and WebP images
+- **Multiple Formats**: Support for JPEG, jpg, GIF, and WebP images
 
 ### 🤖 AI-Powered Analysis
 - **Gemini AI Integration**: Advanced recipe analysis using Google's Gemini Model
@@ -35,25 +35,25 @@ A cross-platform mobile application built with React Native Expo and Node.js tha
 
 ### Recipe Analysis & Results
 <div align="center">
-<img src="./assets/Result_1.png" width="250" alt="Recipe Analysis Results"/>
-<img src="./assets/Result_2.png" width="250" alt="Creative Solutions and Tips"/>
-<img src=".assets/Result_3.png" width="250" alt="Smart Alternatives"/>
+<img src="./assets/Result_1.jpg" width="250" alt="Recipe Analysis Results"/>
+<img src="./assets/Result_2.jpg" width="250" alt="Creative Solutions and Tips"/>
+<img src=".assets/Result_3.jpg" width="250" alt="Smart Alternatives"/>
 </div>
 
 *Advanced AI analysis showing feasibility scoring, ingredient matching, and intelligent substitution suggestions*
 
 ### Pantry Management
 <div align="center">
-<img src=".assets/Home.png" width="250" alt="Digital Pantry"/>
-<img src=".assets/Add.png" width="250" alt="Ingredient Selection"/>
+<img src=".assets/Home.jpg" width="250" alt="Digital Pantry"/>
+<img src=".assets/Add.jpg" width="250" alt="Ingredient Selection"/>
 </div>
 
 *Comprehensive pantry management with categorized ingredients and smart search functionality*
 
 ### Recipe Upload & Home
 <div align="center">
-<img src=".assets/Upload.png" width="250" alt="Screen"/>
-<img src=".assets/Uploaded.png" width="250" alt="Recipe Upload"/>
+<img src=".assets/Upload.jpg" width="250" alt="Screen"/>
+<img src=".assets/Uploaded.jpg" width="250" alt="Recipe Upload"/>
 </div>
 
 *Intuitive user interface with camera integration and recipe image processing capabilities*
